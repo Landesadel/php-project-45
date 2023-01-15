@@ -3,10 +3,19 @@
     "bin": ["bin/brain-games"],
     "description": "hexlet php-package",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Landesadel",
+            "email": "iliillimusicforever@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Hexlet\\Code\\": "src/"
-        }
+        },
+        "files": [ "src/Cli.php" ]
     },
-    "require": {}
+    "require": {
+        "wp-cli/php-cli-tools": "^0.11.16"
+    }
 }

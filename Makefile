@@ -6,3 +6,6 @@ brain-game:
 
 validate:
 	composer validate
+
+dump:
+	composer dump-autoload
