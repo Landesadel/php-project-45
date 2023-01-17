@@ -6,6 +6,8 @@ brain-game:
 
 brain-even:
 	@php ./bin/brain-even
+brain-calc:
+	@php ./bin/brain-calc
 
 validate:
 	composer validate
