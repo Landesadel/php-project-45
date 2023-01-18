@@ -4,7 +4,7 @@ namespace BrainGames\Game\CalcGame;
 
 use function BrainGames\Engine\game;
 
-function calcGame():void
+function calcGame(): void
 {
     $params = ['*', '+', '-'];
 

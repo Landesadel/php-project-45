@@ -3,7 +3,8 @@
     "bin": [
         "bin/brain-games",
         "bin/brain-even",
-        "bin/brain-calc"
+        "bin/brain-calc",
+        "bin/brain-gcd"
     ],
     "description": "hexlet php-package",
     "license": "MIT",
@@ -21,11 +22,13 @@
             "src/Cli.php",
             "src/engine.php",
             "src/game/evenGame.php",
-            "src/game/calcGame.php"
+            "src/game/calcGame.php",
+            "src/game/gcdGame.php"
         ]
     },
     "require": {
-        "wp-cli/php-cli-tools": "^0.11.16"
+        "wp-cli/php-cli-tools": "^0.11.16",
+        "ext-gmp": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
