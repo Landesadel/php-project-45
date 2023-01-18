@@ -2,8 +2,8 @@
 
 <?php
 
-use function BrainGames\Game\CalcGame\calcGame;
+use function BrainGames\Game\GcdGame\gcdGame;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-calcGame();
+gcdGame();
