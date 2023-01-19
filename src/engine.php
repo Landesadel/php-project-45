@@ -5,18 +5,18 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-function game(string $game, mixed $params = null): void
+function game(string $game, string $condition, mixed $params = null ): void
 {
     line('Welcome to the Brain Games!');
     $name = prompt('May i have your name?');
     line("Hello, {$name}!");
 
-    line('Answer "yes" if the number is even, otherwise answer "no".');
+    line($condition);
 
     $count = 0;
 
     while($count < 3){
-        if ($game === 'even') {
+        if ($game === 'even' || $game === 'prime') {
             $question = random_int(1, 60);
         } elseif ($game === 'calc') {
             $numb1 = random_int(20, 60);
@@ -76,6 +76,11 @@ function game(string $game, mixed $params = null): void
             $valid = is_numeric($answer);
             $correct = 'number';
             $check = is_numeric($correctAnsw);
+        } elseif ($game === 'prime') {
+            [$y, $n] = $params;
+            $correct = $y . ' or ' . $n;
+            $valid = in_array($answer, $params);
+            $check = gmp_prob_prime($question);
         }
 
         if (!$valid) {
@@ -86,8 +91,8 @@ function game(string $game, mixed $params = null): void
             die();
         }
 
-        if ($check) {
-            if ($game === 'even') {
+        if ($check === true || $check === 2 || $check === 1) {
+            if ($game === 'even' || $game === 'prime') {
                 $correctAnsw = $y;
             } elseif ($game === 'calc' || $game === 'gcd' || $game === 'progression') {
                 $answer = intval($answer);
@@ -103,7 +108,7 @@ function game(string $game, mixed $params = null): void
                 );
                 die();
             }
-        } elseif (!$check && $game === 'even') {
+        } elseif (!$check || $check === 0) {
             $correctAnsw = $n;
 
             if ($answer == $correctAnsw) {
