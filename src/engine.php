@@ -15,7 +15,7 @@ function game(string $game, mixed $params = null): void
 
     $count = 0;
 
-    while($count < 3) {
+    while($count < 3){
         if ($game === 'even') {
             $question = random_int(1, 60);
         } elseif ($game === 'calc') {
@@ -27,6 +27,21 @@ function game(string $game, mixed $params = null): void
             $numb1 = random_int(10, 20);
             $numb2 = random_int(1, 10);
             $question = $numb1 . ' ' . $numb2;
+        } elseif ($game === 'progression') {
+            $firstNumb = random_int(2, 5);
+            $size = random_int(5, 10);
+            $progrDiff = random_int(2, 10);
+            $numbCollection = [];
+
+            for ($i = 0; $i <= $size; $i++) {
+                $firstNumb = $firstNumb + ($progrDiff - 1);
+                $numbCollection[] = $firstNumb;
+            }
+
+            $index = array_rand($numbCollection);
+            $correctAnsw = $numbCollection[$index];
+            $numbCollection[$index] = '..';
+            $question = implode(' ', $numbCollection);
         }
 
         line("Question: {$question}");
@@ -57,7 +72,12 @@ function game(string $game, mixed $params = null): void
             $valid = is_numeric($answer);
             $correctAnsw = gmp_gcd($numb1, $numb2);
             $check = is_numeric($correctAnsw);
+        } elseif ($game === 'progression') {
+            $valid = is_numeric($answer);
+            $correct = 'number';
+            $check = is_numeric($correctAnsw);
         }
+
         if (!$valid) {
             line(
                 "'{$answer}' is wrong answer ;(. Correct answer was {$correct}. 
@@ -69,7 +89,7 @@ function game(string $game, mixed $params = null): void
         if ($check) {
             if ($game === 'even') {
                 $correctAnsw = $y;
-            } elseif ($game === 'calc' || $game === 'gcd') {
+            } elseif ($game === 'calc' || $game === 'gcd' || $game === 'progression') {
                 $answer = intval($answer);
             }
 
@@ -83,12 +103,8 @@ function game(string $game, mixed $params = null): void
                 );
                 die();
             }
-        } elseif (!$check) {
-            if ($game === 'even') {
-                $correctAnsw = $n;
-            } elseif ($game === 'calc' || $game === 'gcd') {
-                $answer = intval($answer);
-            }
+        } elseif (!$check && $game === 'even') {
+            $correctAnsw = $n;
 
             if ($answer == $correctAnsw) {
                 line('Correct!');
