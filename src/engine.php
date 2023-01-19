@@ -47,7 +47,6 @@ function game(string $game, string $condition, mixed $params = null ): void
         line("Question: {$question}");
         $answer = prompt("Your answer: ");
 
-
         if ($game === 'even') {
             [$y, $n] = $params;
             $correct = $y . ' or ' . $n;
