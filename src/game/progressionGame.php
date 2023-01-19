@@ -6,5 +6,6 @@ use function BrainGames\Engine\game;
 
 function progressionGame(): void
 {
-    game('progression');
+    $condition = 'What number is missing in the progression?';
+    game('progression', $condition);
 }

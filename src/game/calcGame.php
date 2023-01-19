@@ -6,7 +6,7 @@ use function BrainGames\Engine\game;
 
 function calcGame(): void
 {
-    $params = ['*', '+', '-'];
+    $condition = 'What is the result of the expression?';
 
-    game('calc', $params);
+    game('calc', $condition, ['*', '+', '-']);
 }
