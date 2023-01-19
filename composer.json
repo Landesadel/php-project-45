@@ -4,7 +4,8 @@
         "bin/brain-games",
         "bin/brain-even",
         "bin/brain-calc",
-        "bin/brain-gcd"
+        "bin/brain-gcd",
+        "bin/brain-progression"
     ],
     "description": "hexlet php-package",
     "license": "MIT",
@@ -23,7 +24,8 @@
             "src/engine.php",
             "src/game/evenGame.php",
             "src/game/calcGame.php",
-            "src/game/gcdGame.php"
+            "src/game/gcdGame.php",
+            "src/game/progressionGame.php"
         ]
     },
     "require": {
