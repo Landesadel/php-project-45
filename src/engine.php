@@ -5,7 +5,7 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-function game(string $game, string $condition, mixed $params = null ): void
+function game(string $game, string $condition, mixed $params = null): void
 {
     line('Welcome to the Brain Games!');
     $name = prompt('May i have your name?');
@@ -15,7 +15,7 @@ function game(string $game, string $condition, mixed $params = null ): void
 
     $count = 0;
 
-    while($count < 3){
+    while ($count < 3) {
         if ($game === 'even' || $game === 'prime') {
             $question = random_int(1, 60);
         } elseif ($game === 'calc') {
@@ -125,7 +125,7 @@ function game(string $game, string $condition, mixed $params = null ): void
     line("Congratulations, {$name}!");
 }
 
-function gcd(int $n,int $m): int
+function gcd(int $n, int $m): int
 {
     if ($m > 0) {
         return gcd($m, $n % $m);
