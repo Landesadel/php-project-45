@@ -22,7 +22,7 @@ function game(string $game, string $condition, mixed $params = null ): void
             $numb1 = random_int(20, 60);
             $numb2 = random_int(1, 10);
             $operation = $params[array_rand($params)];
-            $question = $numb1 . $operation . $numb2;
+            $question = $numb1 . ' ' . $operation . ' ' . $numb2;
         } elseif ($game === 'gcd') {
             $numb1 = random_int(10, 20);
             $numb2 = random_int(1, 10);
