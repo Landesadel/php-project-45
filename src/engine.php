@@ -69,7 +69,7 @@ function game(string $game, string $condition, mixed $params = null ): void
             $valid = is_numeric($answer);
             $correct = 'number';
             $valid = is_numeric($answer);
-            $correctAnsw = gmp_gcd($numb1, $numb2);
+            $correctAnsw = gcd($numb1, $numb2);
             $check = is_numeric($correctAnsw);
         } elseif ($game === 'progression') {
             $valid = is_numeric($answer);
@@ -79,7 +79,7 @@ function game(string $game, string $condition, mixed $params = null ): void
             [$y, $n] = $params;
             $correct = $y . ' or ' . $n;
             $valid = in_array($answer, $params);
-            $check = gmp_prob_prime($question);
+            $check = searchPrime($question);
         }
 
         if (!$valid) {
@@ -90,7 +90,7 @@ function game(string $game, string $condition, mixed $params = null ): void
             die();
         }
 
-        if ($check === true || $check === 2 || $check === 1) {
+        if ($check) {
             if ($game === 'even' || $game === 'prime') {
                 $correctAnsw = $y;
             } elseif ($game === 'calc' || $game === 'gcd' || $game === 'progression') {
@@ -107,7 +107,7 @@ function game(string $game, string $condition, mixed $params = null ): void
                 );
                 die();
             }
-        } elseif (!$check || $check === 0) {
+        } elseif (!$check) {
             $correctAnsw = $n;
 
             if ($answer == $correctAnsw) {
@@ -123,4 +123,24 @@ function game(string $game, string $condition, mixed $params = null ): void
         }
     }
     line("Congratulations, {$name}!");
+}
+
+function gcd(int $n,int $m): int
+{
+    if ($m > 0) {
+        return gcd($m, $n % $m);
+    } else {
+        return abs($n);
+    }
+}
+
+function searchPrime(int $num): bool
+{
+    for ($i = 2; $i < $num; $i++) {
+        if ($num % $i === 0) {
+            return false;
+            break;
+        }
+    }
+    return true;
 }
