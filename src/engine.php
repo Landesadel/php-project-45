@@ -5,7 +5,7 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-function game(string $game, string $condition, mixed $params = null ): void
+function game(string $game, string $condition, mixed $params = null): void
 {
     line('Welcome to the Brain Games!');
     $name = prompt('May i have your name?');
@@ -15,14 +15,14 @@ function game(string $game, string $condition, mixed $params = null ): void
 
     $count = 0;
 
-    while($count < 3){
+    while ($count < 3) {
         if ($game === 'even' || $game === 'prime') {
             $question = random_int(1, 60);
         } elseif ($game === 'calc') {
             $numb1 = random_int(20, 60);
             $numb2 = random_int(1, 10);
             $operation = $params[array_rand($params)];
-            $question = $numb1 . $operation . $numb2;
+            $question = $numb1 . ' ' . $operation . ' ' . $numb2;
         } elseif ($game === 'gcd') {
             $numb1 = random_int(10, 20);
             $numb2 = random_int(1, 10);
@@ -69,7 +69,7 @@ function game(string $game, string $condition, mixed $params = null ): void
             $valid = is_numeric($answer);
             $correct = 'number';
             $valid = is_numeric($answer);
-            $correctAnsw = gmp_gcd($numb1, $numb2);
+            $correctAnsw = gcd($numb1, $numb2);
             $check = is_numeric($correctAnsw);
         } elseif ($game === 'progression') {
             $valid = is_numeric($answer);
@@ -79,18 +79,18 @@ function game(string $game, string $condition, mixed $params = null ): void
             [$y, $n] = $params;
             $correct = $y . ' or ' . $n;
             $valid = in_array($answer, $params);
-            $check = gmp_prob_prime($question);
+            $check = searchPrime($question);
         }
 
         if (!$valid) {
             line(
-                "'{$answer}' is wrong answer ;(. Correct answer was {$correct}. 
-                Let's try again, {$name}!"
+                "'{$answer}' is wrong answer ;(. Correct answer was {$correct}." . PHP_EOL
             );
+            line("Let's try again, {$name}!");
             die();
         }
 
-        if ($check === true || $check === 2 || $check === 1) {
+        if ($check) {
             if ($game === 'even' || $game === 'prime') {
                 $correctAnsw = $y;
             } elseif ($game === 'calc' || $game === 'gcd' || $game === 'progression') {
@@ -107,7 +107,7 @@ function game(string $game, string $condition, mixed $params = null ): void
                 );
                 die();
             }
-        } elseif (!$check || $check === 0) {
+        } elseif (!$check) {
             $correctAnsw = $n;
 
             if ($answer == $correctAnsw) {
@@ -123,4 +123,24 @@ function game(string $game, string $condition, mixed $params = null ): void
         }
     }
     line("Congratulations, {$name}!");
+}
+
+function gcd(int $n, int $m): int
+{
+    if ($m > 0) {
+        return gcd($m, $n % $m);
+    } else {
+        return abs($n);
+    }
+}
+
+function searchPrime(int $num): bool
+{
+    for ($i = 2; $i < $num; $i++) {
+        if ($num % $i === 0) {
+            return false;
+            break;
+        }
+    }
+    return true;
 }

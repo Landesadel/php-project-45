@@ -9,7 +9,7 @@ function greetings()
 {
     line('Welcome to the Brain Games!');
 
-    $name = prompt('May i have your name?');
+    $name = prompt('May I have your name?');
 
     line("Hello, {$name}!");
 }
