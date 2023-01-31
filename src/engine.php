@@ -84,9 +84,9 @@ function game(string $game, string $condition, mixed $params = null): void
 
         if (!$valid) {
             line(
-                "'{$answer}' is wrong answer ;(. Correct answer was {$correct}. 
-                Let's try again, {$name}!"
+                "'{$answer}' is wrong answer ;(. Correct answer was {$correct}." . PHP_EOL
             );
+            line("Let's try again, {$name}!");
             die();
         }
 
